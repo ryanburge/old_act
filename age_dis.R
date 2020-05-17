@@ -27,3 +27,8 @@ graph %>%
   labs(x = "", y = "", title = "Age Distribution of the CCES", subtitle = "", caption = "Data: CCES 2018") +
   ggsave("D://old_act/images/age_distribution.png", width = 9, height = 6)
 
+graph <- full %>% 
+  mutate(age2 = frcode(age2 = age >= 65 ~ "Yes", 
+                                     TRUE ~ "No")) %>% 
+  group_by(year) %>% 
+  ct(age2, wt = weight, show_na = FALSE)
